@@ -11,20 +11,13 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./src/output.css" />
     <title>Frontend Mentor | Advice generator app</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
   </head>
   <body
     id="body"
@@ -32,34 +25,43 @@
   >
     <div
       id="AdviceData"
-      class="flex flex-col relative shadow-2xl rounded-xl gap-7 bg-slate-700 items-center justify-center py-5 px-5 m-4 w-[30rem] h-[25rem]  md:w-[40rem] md:h-[20rem]"
+      class="flex flex-col relative shadow-2xl rounded-xl gap-7 bg-slate-800 items-center justify-center py-5 px-5 m-4 w-[30rem] h-[25rem] md:w-[40rem] md:h-[20rem]"
     >
-    <!-- Advice Id -->
-      <h1 id="dataId" class="text-[#28bf6c] uppercase text-base font-bold md:text-sm"></h1>
+      <!-- Advice Id -->
+      <h1
+        id="dataId"
+        class="text-[#28bf6c] uppercase text-base font-bold md:text-sm"
+      ></h1>
 
       <!-- Advice -->
-      <h1 id="dataAdvice" class="text-white text-2xl text-center max-w-md font-Manrope font-extrabold"></h1>
+      <h1
+        id="dataAdvice"
+        class="text-white text-2xl text-center max-w-md font-Manrope font-extrabold"
+      ></h1>
       <img src="./images/pattern-divider-desktop.svg" alt="" />
-      <i class="ri-dice-5-fill px-3 py-3 bg-[#28bf6c] -bottom-[35px]  rounded-full text-4xl text-slate-700 absolute"></i>
+     <button
+     onclick="fetchData()"  
+     class="absolute -bottom-[30px] rounded-full transition duration-200 hover:shadow-[10px_20px_50px_5px_rgba(52,_192,_115,_0.7)]	"
+     >
+      <i onclick=""
+      class="ri-dice-5-fill px-3 py-3 bg-[#34c073]  rounded-full text-4xl text-slate-700 "
+    ></i>
+     </button>
     </div>
 
     <!-- Javascript  -->
     <script>
-      const a = document.addEventListener("DOMContentLoaded", () => {
-        const Apiurl = "https://api.adviceslip.com/advice";
+      
+      function fetchData(){
 
-        fetch(Apiurl)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data.slip.id);
-
-            const AdviceId = document.getElementById("dataId");
-            const Advice = document.getElementById("dataAdvice");
-
-            AdviceId.innerHTML = `Advice # ${data.slip.id}`;
-            Advice.innerHTML = `"${data.slip.advice}"`;
-          });
-      });
+        fetch("https://api.adviceslip.com/advice")
+        .then(res=>res.json())
+        .then((data)=>{
+          document.getElementById("dataId").innerHTML = `Advice #${data.slip.id}`
+          document.getElementById("dataAdvice").innerHTML = `"${data.slip.advice}"`
+        })
+      }
+      window.onload = fetchData()
     </script>
   </body>
 </html>
